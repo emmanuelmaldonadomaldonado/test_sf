@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Item History</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Item History</h1>
+    {% if history|length < 1 %}
+    <h4 class="no-history">There is no history available.</h4>
+    <br>
+    <a href="/actions" class="btn">Back</a>
+    {% else %}
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Restocking Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                    <tr>
+                        <td>{{ entry.product_id }}</td>
+                        <td>{{ entry.product.name }}</td>
+                        <td>{{ entry.product.description }}</td>
+                        <td>{{ entry.quantity }}</td>
+                        <td>{{ entry.restocking_price }}</td>
+                        <td>{{ entry.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <p class="expenditure">Monthly expenditure: ${{ monthly_expenditure|round(2) }}</p>
+    <button id="printButton" class="btn">Print</button>
+    <a href="/view_items" class="btn">Back</a>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('printButton').addEventListener('click', function() {
+        document.body.style.backgroundColor = 'whitesmoke';
+        window.print();
+    });
+</script>
+{% endblock %}

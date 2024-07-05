@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Log In</title>
+{% endblock %}
+
+{% block body %}
+<div class="login-signup-wrapper">
+    <div class="login-signup-content">
+        <img src="{{ url_for('static', filename='images/StockFlow.png') }}" alt="Logo" class="logo">
+        <h1>Log In</h1>
+        <form action="/login" method="POST">
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Log In">
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </div>
+</div>
+{% endblock %}

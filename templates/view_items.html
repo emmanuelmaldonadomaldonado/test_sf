@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>View Items</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/view_items.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 class="view-items-title" style="text-align: center;">View Items</h1>
+    <form id="search-form" action="{{ url_for('view_items') }}" method="GET">
+        <input id="search-input" type="text" name="search" placeholder="Search by name" value="{{ search_value }}">
+        <button type="submit" class="btn btn-search">Search</button>
+    </form>
+    <div style="text-align: center;">
+        <a href="/history_view" class="btn btn-history">History</a>
+    </div>
+    {% if tasks|length < 1 %}
+    <h4 class="no-inventory" style="text-align: center;">There is no inventory, add item please!</h4>
+    <br>
+    <div style="text-align: center;">
+        <a href="/actions" class="btn btn-back">Back</a>
+    </div>
+    {% else %}
+    <div class="card-container">
+        {% for task in tasks %}
+        <div class="card">
+            <div class="left-column">
+                <div class="item-info">
+                    <div class="background-name">
+                        <div class="item-name">{{ task.name }}</div>
+                    </div>
+                    <div class="item-price">Total Price: ${{ task.total_price|round(2) }}</div>
+                    <div class="item-date">Date Created: {{ task.date_created.date() }}</div>
+                </div>
+                <div class="quantity-control">
+                    <div class="quantity-label">Quantity:</div>
+                    <div class="quantity-buttons">
+                        <button class="decrement" onclick="decrement('quantity-{{ task.id }}', '{{ task.quantity }}')">-</button>
+                        <span class="quantity-display" id="quantity-{{ task.id }}">{{ task.quantity }}</span>
+                        <button class="increment" onclick="increment('quantity-{{ task.id }}', '{{ task.quantity }}')">+</button>
+                    </div>
+                </div>
+                <div id="description" class="svg-copntainer" onclick="openModal('{{ task.description }}')">
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#001f3f" fill="none">
+                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M12.2422 17V12C12.2422 11.5286 12.2422 11.2929 12.0957 11.1464C11.9493 11 11.7136 11 11.2422 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.992 8H12.001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="button-group">
+                    <button onclick="window.location.href='/update_product/{{ task.id }}'">Update</button>
+                    <form action="/delete/{{ task.id }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <button onclick="window.location.href='/material_history/{{ task.id }}'">History</button>
+                    <button onclick="window.location.href='/set_alert/{{ task.id }}'">Alert</button>
+                    <button id="accept-button-{{ task.id }}" class="accept-button" onclick="acceptUpdate('{{ task.id }}', '{{ task.quantity }}')">Save</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <div style="text-align: center;">
+        <a href="/actions" class="btn btn-back">Back</a>
+    </div>
+    {% endif %}
+</div>
+<img src="{{ url_for('static', filename='images/Screenshot_2024-04-23_at_6.35.51_PM-removebg-preview.png') }}" class="top-right-image" alt="Descriptive Alt Text">
+<div id="descriptionModal" class="modal">
+    <div class="modal-content">
+        <h1 class="title">Description</h1>
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<script>
+const originalQuantities = {};
+
+function confirmDelete() {
+    return confirm('Are you sure you want to delete this item?');
+}
+
+function decrement(id, originalQuantity) {
+    const elem = document.getElementById(id);
+    let value = parseInt(elem.innerText);
+    if (value > 0) {
+        value -= 1;
+        elem.innerText = value;
+        toggleAcceptButton(id, value, originalQuantity);
+    }
+}
+
+function increment(id, originalQuantity) {
+    const elem = document.getElementById(id);
+    let value = parseInt(elem.innerText);
+    value += 1;
+    elem.innerText = value;
+    toggleAcceptButton(id, value, originalQuantity);
+}
+
+function toggleAcceptButton(id, newQuantity, originalQuantity) {
+    const acceptButton = document.getElementById(`accept-button-${id.split('-')[1]}`);
+    if (newQuantity != originalQuantity) {
+        acceptButton.style.display = 'inline';
+    } else {
+        acceptButton.style.display = 'none';
+    }
+}
+
+function acceptUpdate(taskId, originalQuantity) {
+    const quantity = parseInt(document.getElementById(`quantity-${taskId}`).innerText);
+    fetch(`/update_quantity/${taskId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ quantity: quantity })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Quantity updated successfully!');
+            document.getElementById(`accept-button-${taskId}`).style.display = 'none';
+            originalQuantities[taskId] = quantity;
+        } else {
+            response.json().then(data => {
+                alert('Failed to update quantity: ' + data.message);
+            });
+        }
+    });
+}
+
+function openModal(description) {
+    document.getElementById("modal-description").innerText = description;
+    document.getElementById("descriptionModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("descriptionModal").style.display = "none";
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById("descriptionModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+{% endblock %}

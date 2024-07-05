@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Settings</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center;">Settings</h1>
+    <div style="text-align: center;">
+        <p>Logged in as: {{ current_user.email }}</p>
+        <form action="/change_password" method="POST">
+            <input type="password" name="current_password" placeholder="Current Password" required><br><br>
+            <input type="password" name="new_password" placeholder="New Password" required><br><br>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required><br><br>
+            <input type="submit" value="Change Password" class="btn">
+        </form>
+        <br>
+        <form action="/delete_account" method="POST" onsubmit="return confirmDeleteAccount();">
+            <input type="submit" value="Delete Account" class="btn">
+        </form>
+        <br>
+        <form action="/logout" method="GET">
+            <input type="submit" value="Log Out" class="btn">
+        </form>
+        <br>
+        <form action="/actions" method="GET">
+            <input type="submit" value="Back" class="btn">
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmDeleteAccount() {
+        return confirm('Are you sure you want to delete your account?');
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,530 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #001f3f;
+}
+
+.content {
+    margin: 0 auto;
+    width: auto;
+}
+
+table, td, th {
+    border: 1px solid #aaa;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 70%;
+}
+
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 200px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 12px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for Login and Signup pages */
+.login-signup-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #001f3f; /* 002147 */
+}
+
+.login-signup-content {
+    color: #000; /* Black text color */
+    margin: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centering text within the content */
+    max-width: 400px;
+    width: 100%;
+    background-color: white; /* Dark blue background */
+    color: #000000; /* White text color */
+}
+
+.login-signup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between form elements */
+}
+
+.login-signup-content input[type="text"], 
+.login-signup-content input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded borders for text fields */
+    font-size: 18px; /* Larger text */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-signup-content input[type="submit"], 
+.login-signup-content .btn {
+    align-items: center;
+    appearance: none;
+    background-color: rgb(164, 189, 206);
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px -1px, rgba(0, 0, 0, 0.1) 0 4px 6px 0, rgba(0, 0, 0, 0.1) 0 1px 10px 0;
+    box-sizing: border-box;
+    color: #123B5A;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Bowlby One", sans-serif;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform, opacity;
+    z-index: 0;
+}
+
+.login-signup-content input[type="submit"]:hover, 
+.login-signup-content .btn:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206);
+}
+
+.login-signup-content input[type="submit"]:active, 
+.login-signup-content .btn:active {
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    outline: none;
+}
+
+
+.login-signup-content input[type="submit"]:focus, 
+.login-signup-content .btn:focus {
+    outline: none;
+    border: 2px solid  rgb(164, 189, 206);
+}
+
+
+.login-signup-content input[type="submit"]:disabled, 
+.login-signup-content .btn:disabled {
+    background-color: rgb(164, 189, 206);
+    border-color: rgb(164, 189, 206);
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    color: rgb(164, 189, 206);
+    cursor: not-allowed;
+}
+
+.login-signup-content input[type="submit"]:disabled:hover, 
+.login-signup-content .btn:disabled:hover {
+    background-color: rgb(164, 189, 206);
+    border-color: rgb(164, 189, 206);
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    color: rgb(164, 189, 206);
+    cursor: not-allowed;
+}
+
+.login-signup-content input[type="submit"]:disabled:active, 
+.login-signup-content .btn:disabled:active {
+    background-color: rgb(164, 189, 206);
+    border-color: rgb(164, 189, 206);
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    color: rgb(164, 189, 206);
+    cursor: not-allowed;
+}
+
+.login-signup-content input[type="submit"]:disabled:focus, 
+.login-signup-content .btn:disabled:focus {
+    background-color: rgb(164, 189, 206);
+    border-color: rgb(164, 189, 206);
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    color: rgb(164, 189, 206);
+    cursor: not-allowed;
+}
+
+.login-signup-content .alert {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-signup-content .alert-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.login-signup-content a {
+    color: #001f3f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-signup-content a:hover {
+    text-decoration: underline;
+}
+
+/* Existing styles */
+
+.login-signup-content .logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: -50px;
+    margin-top: -20px;
+}
+
+@media (max-width: 500px) {
+    .login-signup-content {
+        padding: 20px;
+    }
+
+    .login-signup-content input[type="text"], 
+    .login-signup-content input[type="password"], 
+    .login-signup-content input[type="submit"], 
+    .login-signup-content .btn {
+        font-size: 16px;
+    }
+}
+
+/* Existing styles */
+
+/* Card styles */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    box-sizing: border-box;
+    max-width: 400px; /* Ensure the cards have a maximum width */
+    display: flex;
+    flex-direction: row; /* Align content horizontally */
+    height: 200px; /* Set a fixed height */
+    margin-bottom: 50px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.item-name {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.item-price,
+.item-date {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555;
+    white-space: nowrap; /* Evita que la fecha se divida en varias líneas */
+    overflow: hidden; /* Oculta cualquier contenido que no quepa */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el contenido es demasiado largo para caber */
+}
+
+.item-description {
+    position: absolute;
+    top: 109%; /* Ajusta este valor según sea necesario para posicionar la descripción emergente encima de la tarjeta */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+    /* Otros estilos de la descripción emergente */
+}
+
+
+.quantity-control {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    margin-top: -15px;
+}
+
+.quantity-label {
+    font-size: 1em;
+    margin-right: 10px; /* Add some space between label and buttons */
+    color: #555;
+}
+
+.quantity-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 0.9em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-control button.decrement {
+    border-radius: 15px 0 0 15px;
+}
+
+.quantity-control button.increment {
+    border-radius: 0 15px 15px 0;
+}
+
+.quantity-control button:hover {
+    background-color: #0056b3;
+}
+
+.quantity-display {
+    font-size: 1em;
+    margin: 0 10px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.button-group button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    width: 100px;
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+.item-description {
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+}
+
+.card:hover .item-description {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* Adjustments for button styles to match existing styles */
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Ensure the search form and history link are styled correctly */
+#search-form {
+    display: flex; /* Cambiado a flex para poder alinear los elementos horizontalmente */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 20px;
+}
+
+/* Ensure the search form and history link are styled correctly */
+#search-form {
+    display: flex; /* Usamos flexbox para alinear los elementos horizontalmente */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 20px;
+}
+
+/* Styles for the search bar */
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 9px 0 0 9px; /* Bordes redondeados solo en la izquierda */
+    box-sizing: border-box;
+    width: 400px; /* Ajusta el ancho según sea necesario */
+    margin-left: auto;
+}
+
+/* Styles for the search button */
+#search-form button {
+    padding: 11px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Color del botón */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 0 9px 9px 0; /* Bordes redondeados solo en la derecha */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 2px; /* Elimina el espacio entre el input y el botón */
+}
+
+#search-form button:hover {
+    background-color: #0056b3; /* Color al pasar el ratón por encima */
+}
+
+
+
+/* En tu archivo CSS */
+.btn-history,
+.btn-back {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    width: 150px;
+}
+
+.btn-history:hover,
+.btn-back:hover {
+    background-color: #0056b3;
+}
+
+
+/* En tu archivo CSS */
+.view-items-title {
+    color: #ffffff; /* Color blanco para el texto */
+    /* background-color: #89CFF0; */
+    text-align: left;
+    font-size: 2em; /* Tamaño del texto */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    margin: 20px auto; /* Margen superior e inferior, centrado horizontal */
+    width: fit-content; /* Ancho ajustado al contenido */
+    margin-left: 10px;
+    /* text-shadow: 2px 2px 2px #89CFF0; */
+    
+}
+
+.top-right-image {
+    position: fixed; /* O usa absolute si prefieres */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    width: 100px; /* Ajusta según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    z-index: 1000; /* Asegura que la imagen esté por encima de otros elementos */
+}
+
+.accept-button {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    z-index: 1;
+}
+
+.accept-button:hover {
+    background-color: #218838; /* Color de fondo verde más oscuro al pasar el ratón */
+}

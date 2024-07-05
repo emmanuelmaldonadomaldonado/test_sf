@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Update Product</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/update_product.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Update Product</h1>
+    <form action="/update_product/{{ task.id }}" method="POST" onsubmit="return validateForm()">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" value="{{ task.name }}" pattern="[A-Za-z\s]+" title="Please enter only letters." required><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="{{ task.description }}" pattern="[A-Za-z\s]+" title="Please enter only letters." required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="{{ task.quantity }}" min="0" required><br>
+
+        <label for="total_price">Total Price:</label>
+        <input type="number" id="total_price" name="total_price" value="{{ task.total_price }}" step="0.01" min="0" required><br>
+        <span style="color: red;">Only change price if you did restock</span><br>
+
+        <button>Update</button>
+    </form>
+    <form action="/view_items" method="GET">
+        <button>Back</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        const name = document.getElementById('name').value;
+        const description = document.getElementById('description').value;
+        const quantity = document.getElementById('quantity').value;
+        const totalPrice = document.getElementById('total_price').value;
+
+        const namePattern = /^[A-Za-z\s]+$/;
+        const descriptionPattern = /^[A-Za-z\s]+$/;
+
+        if (!namePattern.test(name)) {
+            alert('Product Name must contain only letters.');
+            return false;
+        }
+
+        if (!descriptionPattern.test(description)) {
+            alert('Description must contain only letters.');
+            return false;
+        }
+
+        if (isNaN(quantity) || quantity < 0) {
+            alert('Quantity must be a non-negative number.');
+            return false;
+        }
+
+        if (isNaN(totalPrice) || totalPrice < 0) {
+            alert('Total Price must be a non-negative number.');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+{% endblock %}

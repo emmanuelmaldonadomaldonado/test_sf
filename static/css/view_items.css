@@ -1,0 +1,413 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #001f3f;
+}
+
+.content {
+    margin: 0 auto;
+    width: auto;
+}
+
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 200px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Card styles */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    box-sizing: border-box;
+    max-width: 400px; /* Ensure the cards have a maximum width */
+    display: flex;
+    flex-direction: row; /* Align content horizontally */
+    height: 200px; /* Set a fixed height */
+    margin-bottom: 50px;
+}
+
+.card:after {
+    content: "";
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    position: absolute; 
+    right: 150px;
+    background-color: #001f3f;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.item-info {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.item-name {
+    font-size: 25px;
+    font-weight: 570;
+    color: #123B5A;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.background-name {
+    background-color: rgb(164, 189, 206);
+    height: 33px;
+    width: auto;
+    /* border-radius: 20px; */
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.item-price,
+.item-date {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555;
+    white-space: nowrap; /* Evita que la fecha se divida en varias líneas */
+    overflow: hidden; /* Oculta cualquier contenido que no quepa */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el contenido es demasiado largo para caber */
+    padding-left: 10px;
+}
+
+#description {
+    margin-top: 12px;
+    margin-left: 190px;
+}
+
+
+.quantity-control {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    margin-top: -15px;
+}
+
+.quantity-label {
+    font-size: 1em;
+    margin-right: 10px; /* Add some space between label and buttons */
+    color: #555;
+    padding-left: 10px;
+}
+
+.quantity-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 0.9em;
+    background-color: rgb(164, 189, 206);
+    color: #123B5A;
+    box-shadow: rgba(0, 0, 0, 0.605) 0 3px 5px -1px rgba(0, 0, 0, 0.605) 0 6px 10px 0,rgba(0, 0, 0, 0.605) 0 1px 18px 0;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    font-family: "Bowlby One", sans-serif;
+    font-weight: bold;
+}
+
+.quantity-control button.decrement {
+    border-radius: 15px 0 0 15px;
+}
+
+.quantity-control button.increment {
+    border-radius: 0 15px 15px 0;
+}
+
+.quantity-control button:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206);
+}
+
+.quantity-display {
+    font-size: 1em;
+    margin: 0 10px;
+}
+
+.button-group button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 24px;
+    background-color: rgb(164, 189, 206);
+    color: #123B5A;
+    box-shadow: rgba(0, 0, 0, 0.605) 0 3px 5px -1px rgba(0, 0, 0, 0.605) 0 6px 10px 0,rgba(0, 0, 0, 0.605) 0 1px 18px 0;
+    cursor: pointer;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    font-family: "Bowlby One", sans-serif;
+    font-weight: bold;
+    width: 100px;
+    margin: 7px;
+    margin-top: 3px;
+}
+.button-group button:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206);
+}
+
+/* Ajustar el boton "Save" */
+.accept-button {
+    display: none; /* Mantenerlo oculto por defecto */
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 24px;
+    background-color: rgb(164, 189, 206);
+    color: #123B5A;
+    box-shadow: rgba(0, 0, 0, 0.605) 0 3px 5px -1px, rgba(0, 0, 0, 0.605) 0 6px 10px 0, rgba(0, 0, 0, 0.605) 0 1px 18px 0;
+    cursor: pointer;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    font-family: "Bowlby One", sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.accept-button:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206);
+}
+
+/* Ensure the search form and history link are styled correctly */
+#search-form {
+    display: flex; /* Cambiado a flex para poder alinear los elementos horizontalmente */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 20px;
+}
+
+/* Ensure the search form and history link are styled correctly */
+#search-form {
+    display: flex; /* Usamos flexbox para alinear los elementos horizontalmente */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 20px;
+}
+
+/* Styles for the search bar */
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 9px 0 0 9px; /* Bordes redondeados solo en la izquierda */
+    box-sizing: border-box;
+    width: 400px; /* Ajusta el ancho según sea necesario */
+    margin-left: auto;
+}
+
+/* Styles for the search button */
+#search-form button {
+    padding: 11px 20px;
+    font-size: 16px;
+    background-color: rgb(164, 189, 206);
+    color: #123B5A;
+    box-shadow: rgba(0, 0, 0, 0.605) 0 3px 5px -1px rgba(0, 0, 0, 0.605) 0 6px 10px 0,rgba(0, 0, 0, 0.605) 0 1px 18px 0;
+    cursor: pointer;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    font-family: "Bowlby One", sans-serif;
+    font-weight: bold;
+    border: none; /* Sin borde */
+    border-radius: 0 9px 9px 0; /* Bordes redondeados solo en la derecha */
+    cursor: pointer;
+    margin-left: 2px; /* Elimina el espacio entre el input y el botón */
+}
+
+#search-form button:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206); /* Color al pasar el ratón por encima */
+    border: 2px solid rgb(164, 189, 206); /* Añade un borde de color al pasar el ratón por encima */
+}
+
+.btn-history,
+.btn-back {
+    padding: 10px 20px;
+    background-color: rgb(164, 189, 206);
+    color: #123B5A;
+    box-shadow: rgba(0, 0, 0, 0.605) 0 3px 5px -1px rgba(0, 0, 0, 0.605) 0 6px 10px 0,rgba(0, 0, 0, 0.605) 0 1px 18px 0;
+    cursor: pointer;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    transition: 290ms ease-in-out;
+    font-family: "Bowlby One", sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 150px;
+}
+
+.btn-history:hover,
+.btn-back:hover {
+    background: #001f3f;
+    color: rgb(164, 189, 206);
+    border: 2px solid rgb(164, 189, 206); /* Añade un borde de color al pasar el ratón por encima */
+}
+
+button:active {
+    box-shadow: 0 4px 4px 0 rgba(18, 59, 90, 0.497), 0 8px 12px 6px rgba(18, 59, 90, 0.53);
+    outline: none;
+}
+  
+button:focus {
+    outline: none;
+    border: 2px solid  rgb(164, 189, 206);
+}
+  
+button:not(:disabled) {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+  
+button:not(:disabled):hover {
+    box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+  
+button:not(:disabled):focus {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+  
+button:not(:disabled):active {
+    box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+  
+button:disabled {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.view-items-title {
+    color: #ffffff; /* Color blanco para el texto */
+    /* background-color: #89CFF0; */
+    text-align: left;
+    font-size: 2em; /* Tamaño del texto */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    margin: 20px auto; /* Margen superior e inferior, centrado horizontal */
+    width: fit-content; /* Ancho ajustado al contenido */
+    margin-left: 10px;
+    /* text-shadow: 2px 2px 2px #89CFF0; */
+    
+}
+
+.top-right-image {
+    position: fixed; /* O usa absolute si prefieres */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    width: 100px; /* Ajusta según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    z-index: 1000; /* Asegura que la imagen esté por encima de otros elementos */
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    position: relative; /* Added to position the close button relative to the modal content */
+    border-radius: 15px;
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 200px;
+    max-width: 800px;
+    max-height: 80vh; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border-radius: 15px;
+    position: relative; /* Asegura el posicionamiento de close-button */
+}
+
+.title {
+    font-size: 20px;
+    font-family: 'Bowlby One', sans-serif;
+}
+
+.close-button {
+    position: absolute; /* Positioned absolutely within the modal content */
+    top: 10px; /* Adjust as needed */
+    right: 17px; /* Adjust as needed */
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-description {
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
+}
+
+.no-inventory {
+    color: white;
+}
