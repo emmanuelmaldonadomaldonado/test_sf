@@ -63,11 +63,11 @@ class products(db.Model):
     date_updated = Column(DateTime, nullable=False, server_default=text('CURRENT_TIMESTAMP'), onupdate=datetime.utcnow)
     deleted = Column(Boolean, default=False)
     alert_quantity = Column(Integer, nullable=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # Añadido campo user_id
-    user = relationship('users', backref='products')  # Relación con el modelo users
+    # user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    # user = relationship('users', backref='products')
 
     def __repr__(self):
-        return '<Product %r>' % self.id
+        return '<Task %r>' % self.id
 
 class productHistory(db.Model):
     __tablename__ = 'product_history'
@@ -224,24 +224,18 @@ def add_product():
         quantity = request.form['quantity']
         description = request.form['description']
         total_price = float(request.form['total_price'])
-        new_product = products(
-            name=name, 
-            quantity=quantity, 
-            description=description, 
-            total_price=total_price, 
-            user_id=current_user.id  # Asignar el producto al usuario actual
-        )
+        new_task = products(name=name, quantity=quantity, description=description, total_price=total_price)
 
         try:
-            db.session.add(new_product)
+            db.session.add(new_task)
             db.session.commit()
 
             # Registro de historial con el precio inicial
             history_entry = productHistory(
-                product_id=new_product.id,
-                product_name=new_product.name,
-                quantity=new_product.quantity,
-                restocking_price=new_product.total_price  # Registrar el precio inicial
+                product_id=new_task.id,
+                product_name=new_task.name,
+                quantity=new_task.quantity,
+                restocking_price=new_task.total_price  # Registrar el precio inicial
             )
             db.session.add(history_entry)
             db.session.commit()
@@ -256,22 +250,24 @@ def add_product():
 @app.route('/delete/<int:id>', methods=['POST'])
 @login_required
 def delete(id):
-    task_to_delete = products.query.filter_by(id=id, user_id=current_user.id).first_or_404()
+    task_to_delete = products.query.get_or_404(id)
 
     try:
         # Marcamos el elemento como eliminado en lugar de eliminarlo
         task_to_delete.deleted = True
         db.session.commit()
 
+        # No necesitas registrar una entrada de historial aquí
+
         return redirect('/view_items')
-    except Exception as e:
-        return 'ERROR AL ELIMINAR: ' + str(e)
+    except:
+        return 'ERROR AL ELIMINAR'
 
 
 @app.route('/update_product/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update_product(id):
-    task = products.query.filter_by(id=id, user_id=current_user.id).first_or_404()
+    task = products.query.get_or_404(id)
     if request.method == 'POST':
         task.name = request.form['name']
         task.description = request.form['description']
@@ -331,21 +327,14 @@ def send_alert_email(task):
 @login_required
 def view_items():
     search_query = request.args.get('search')
-    search_value = search_query.strip() if search_query else ''
+    search_value = search_query.strip() if search_query else ''  # Limpiar el valor del campo de búsqueda
 
     if search_value:
         # Filtrar los elementos por nombre usando una consulta que busca coincidencias parciales
-        tasks = products.query.filter(
-            products.name.ilike(f"%{search_value}%"),
-            products.deleted == False,
-            products.user_id == current_user.id  # Filtrar por el usuario actual
-        ).order_by(products.date_created).all()
+        tasks = products.query.filter(products.name.ilike(f"%{search_value}%"), products.deleted == False).order_by(products.date_created).all()
     else:
         # Si no hay consulta de búsqueda, obtener todos los elementos excluyendo los eliminados
-        tasks = products.query.filter_by(
-            deleted=False,
-            user_id=current_user.id  # Filtrar por el usuario actual
-        ).order_by(products.date_created).all()
+        tasks = products.query.filter_by(deleted=False).order_by(products.date_created).all()
     
     return render_template('view_items.html', tasks=tasks, search_value=search_value)
 
